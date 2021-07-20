@@ -1,6 +1,7 @@
 import pygame
 import os
 import neat
+import pickle
 
 pygame.font.init() 
 
@@ -11,6 +12,7 @@ STAT_FONT = pygame.font.SysFont("comicsans", 50)
 END_FONT = pygame.font.SysFont("comicsans", 100)
 DRAW_LINES = False
 gen = 0
+score_max = 0
 
 WIN = pygame.display.set_mode((WIN_WIDTH, WIN_HEIGHT))
 pygame.display.set_caption("Flappy Bird")
@@ -55,7 +57,7 @@ def draw_window(win, birds, pipes, base, score, gen, pipe_ind):
 
 def eval_genomes(genomes, config):
     
-    global  gen
+    global  gen, score_max
     gen += 1
 
     # start by creating lists holding the genome itself, the
@@ -146,6 +148,11 @@ def eval_genomes(genomes, config):
 
         # draw the final window after calculating all objects
         draw_window(WIN, birds, pipes, base, score, gen, pipe_ind)
+
+        # store the genome of the best model for later use 
+        if len(ge) > 0 and score > score_max:
+            score_max = score
+            pickle.dump(ge[0],open("winner", "wb"))
 
         
 
