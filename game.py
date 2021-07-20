@@ -3,7 +3,7 @@ import os
 
 pygame.font.init() 
 
-WIN_WIDTH = 900
+WIN_WIDTH = 600
 WIN_HEIGHT = 800
 FLOOR = 730
 STAT_FONT = pygame.font.SysFont("comicsans", 50)
